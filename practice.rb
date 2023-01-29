@@ -27,3 +27,92 @@ blockchain = [
 # Anthony's KelloggCoin balance is 2650
 
 # 👇👇👇 Your code HERE 👇👇👇
+
+## why not work??? since one transcation have both from_user and "to_user"
+# if one transcation only used for "from_user", then it "to_user" will be ignored
+# every transcation includes either ben or brain, and there is no transcation between them
+# thus the result of ben and brain is correct. other two wrong
+
+ben_balance = 0
+brian_balance = 0
+evan_balance = 0
+anthony_balance = 0
+
+for transactions in blockchain
+  if transactions["from_user"] == "ben"
+    ben_balance = ben_balance - transactions["amount"]
+  elsif transactions["to_user"] == "ben"
+    ben_balance = ben_balance + transactions["amount"]
+  elsif transactions["from_user"] == "brian"
+    brian_balance = brian_balance - transactions["amount"]
+  elsif transactions["to_user"] == "brian"
+    brian_balance = brian_balance + transactions["amount"]
+  elsif transactions["from_user"] == "evan"
+    evan_balance = evan_balance - transactions["amount"]
+  elsif transactions["to_user"] == "evan"
+    evan_balance = evan_balance + transactions["amount"]
+  elsif transactions["from_user"] == "anthony"
+    anthony_balance = anthony_balance - transactions["amount"]
+  elsif transactions["to_user"] == "anthony"
+    anthony_balance = anthony_balance + transactions["amount"]
+
+  end
+
+end 
+
+puts "Ben's KelloggCoin balance is #{ben_balance}"
+puts "brian's KelloggCoin balance is #{brian_balance}"
+puts "evan's KelloggCoin balance is #{evan_balance}"
+puts "anthony's KelloggCoin balance is #{anthony_balance}"
+
+
+######## solution
+
+ben_balance = 0
+brian_balance = 0
+evan_balance = 0
+anthony_balance = 0
+
+for transactions in blockchain
+  if transactions["from_user"] == "ben"
+    ben_balance = ben_balance - transactions["amount"]
+  elsif transactions["from_user"] == "brian"
+    brian_balance = brian_balance - transactions["amount"]
+  elsif transactions["from_user"] == "evan"
+    evan_balance = evan_balance - transactions["amount"]
+  elsif transactions["from_user"] == "anthony"
+    anthony_balance = anthony_balance - transactions["amount"]
+  end 
+  
+  
+  if transactions["to_user"] == "ben"
+    ben_balance = ben_balance + transactions["amount"]
+  elsif transactions["to_user"] == "brian"
+    brian_balance = brian_balance + transactions["amount"]
+  elsif transactions["to_user"] == "evan"
+    evan_balance = evan_balance + transactions["amount"]
+  elsif transactions["to_user"] == "anthony"
+    anthony_balance = anthony_balance + transactions["amount"]
+
+  end
+
+end 
+
+puts "Ben's KelloggCoin balance is #{ben_balance}"
+puts "brian's KelloggCoin balance is #{brian_balance}"
+puts "evan's KelloggCoin balance is #{evan_balance}"
+puts "anthony's KelloggCoin balance is #{anthony_balance}"
+
+
+
+# how to challenge?? 
+# Why might you be feeling dissatisfied - i.e. what are the drawbacks?
+# Well, this solution only works with these 4 specific users.  
+# But what if we added someone new to the blockchain?
+#  We would need to duplicate a lot of the code to accommodate other user balances.
+#  Are there other ways to implement the solution that are not dependent on
+#  knowing who and how many users there are in the transactions?
+
+
+
+
