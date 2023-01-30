@@ -32,13 +32,14 @@ blockchain = [
 # if one transcation only used for "from_user", then it "to_user" will be ignored
 # every transcation includes either ben or brain, and there is no transcation between them
 # thus the result of ben and brain is correct. other two wrong
+# e.g. line 12, take 9000 from ben and add 9000 to evan, if statement hit the first one, which is from_user, then it stop, and go to next hash
 
 ben_balance = 0
 brian_balance = 0
 evan_balance = 0
 anthony_balance = 0
 
-for transactions in blockchain
+for transactions in blockchain # for each hash in array
   if transactions["from_user"] == "ben"
     ben_balance = ben_balance - transactions["amount"]
   elsif transactions["to_user"] == "ben"
@@ -113,6 +114,34 @@ puts "anthony's KelloggCoin balance is #{anthony_balance}"
 #  Are there other ways to implement the solution that are not dependent on
 #  knowing who and how many users there are in the transactions?
 
+# if add someone, then need to a new balacne, a for loo, and a new put.  
 
+people = ["ben","brian","evan","anthony","yang"] #think of people in the list and go through each person and then go thorugh transcations
+
+# track each person's balance, update people into array hashes
+
+accounts = [{"name"=>"ben","balance"=>0},
+{"name"=>"brian","balance"=>0},
+{"name"=>"evan","balance"=>0},
+{"name"=>"anthony","balance"=>0},
+{"name"=>"yang","balance"=>0}
+]
+
+for transactions in blockchain 
+  for account in accounts
+    if transactions["from_user"] == account["name"] # similar to inner join
+      account["balance"] = account["balance"] - transactions["amount"]
+    end 
+    if transactions["to_user"] == account["name"]
+      account["balance"] = account["balance"] + transactions["amount"]
+    end 
+  end 
+
+end 
+
+
+for account1 in accounts
+  puts "#{account1["name"]}'s KelloggCoin balance is #{account1["balance"]}"
+end 
 
 
